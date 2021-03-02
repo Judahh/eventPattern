@@ -1,0 +1,51 @@
+{
+  "name": "event-pattern",
+  "productName": "eventPattern",
+  "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
+  "version": "0.1.0",
+  "private": true,
+  "arrayPath": [
+    "node_modules/backappjh",
+    "app",
+    "dist"
+  ],
+  "config": {
+    "path_dist": "dist/",
+    "main": "main.js"
+  },
+  "description": "Cryptobot project",
+  "keywords": [
+    "judahh",
+    "app"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Judahh/eventPattern.git"
+  },
+  "homepage": "https://github.com/Judahh/eventPattern#readme",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc",
+    "prestart": "tsc",
+    "start": "node $npm_package_config_path_dist$npm_package_config_main",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "journaly": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "babel-plugin-root-import": "latest",
+    "babel-plugin-styled-components": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-filenames": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-prettier": "latest",
+    "prettier": "latest",
+    "sucrase": "latest",
+    "typescript": "latest"
+  }
+}

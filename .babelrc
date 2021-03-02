@@ -1,0 +1,21 @@
+{
+  "env": {
+    "test": {
+      "presets": []
+    },
+    "development": {
+      "presets": []
+    },
+    "production": {
+      "presets": []
+    }
+  },
+  "plugins": [
+    [
+      "root-import",
+      {
+        "rootPathSuffix": "source"
+      }
+    ]
+  ]
+}

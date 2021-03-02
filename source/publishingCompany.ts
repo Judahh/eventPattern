@@ -1,0 +1,59 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Publisher } from './publisher';
+
+class PublishingCompany implements Publisher {
+  protected subscribers: {
+    [topic: string]: Array<(...params: any) => Promise<unknown>>;
+  };
+
+  constructor() {
+    this.subscribers = {};
+  }
+
+  subscribe(
+    topic: string,
+    subscriber: (...params: any) => Promise<unknown>
+  ): boolean {
+    if (this.checkSubscribers(topic, subscriber) !== -1) return false;
+    this.subscribers[topic].push(subscriber);
+    return true;
+  }
+
+  unsubscribe(
+    topic: string,
+    subscriber: (...params: any) => Promise<unknown>
+  ): boolean {
+    const index = this.checkSubscribers(topic, subscriber);
+    if (index === -1) {
+      return false;
+    }
+
+    this.subscribers[topic].splice(index, 1);
+    return true;
+  }
+
+  async publish(topic: string, ...params: any[]): Promise<unknown> {
+    if (!this.subscribers[topic]) {
+      this.subscribers[topic] = [];
+    }
+    return Promise.all(
+      this.subscribers[topic].map((subscriber) => {
+        return subscriber(...params);
+      })
+    );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  protected checkSubscribers(
+    topic: string,
+    subscriber: (...params: any) => Promise<unknown>
+  ): number {
+    if (!this.subscribers[topic]) {
+      this.subscribers[topic] = [];
+    }
+    const index = this.subscribers[topic].indexOf(subscriber);
+    return index;
+  }
+}
+export { PublishingCompany };
