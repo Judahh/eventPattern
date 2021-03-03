@@ -17,9 +17,7 @@ class Magazine implements Subject {
 
   unsubscribe(subscriber: (...params: any[]) => Promise<unknown>): boolean {
     const index = this.findSubscriber(subscriber);
-    if (index === -1) {
-      return false;
-    }
+    if (index === -1) return false;
 
     this.subscribers.splice(index, 1);
     return true;

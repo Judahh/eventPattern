@@ -25,22 +25,17 @@ class PublishingCompany implements Publisher {
     subscriber: (...params: any[]) => Promise<unknown>
   ): boolean {
     const index = this.findSubscriber(topic, subscriber);
-    if (index === -1) {
-      return false;
-    }
+    if (index === -1) return false;
 
     this.subscribers[topic].splice(index, 1);
     return true;
   }
 
   async publish(topic: string, ...params: any[]): Promise<void> {
-    if (!this.subscribers[topic]) {
-      this.subscribers[topic] = [];
-    }
+    if (!this.subscribers[topic]) this.subscribers[topic] = [];
+
     await Promise.all(
-      this.subscribers[topic].map((subscriber) => {
-        return subscriber(...params);
-      })
+      this.subscribers[topic].map((subscriber) => subscriber(...params))
     );
   }
 
@@ -49,11 +44,9 @@ class PublishingCompany implements Publisher {
     topic: string,
     subscriber: (...params: any[]) => Promise<unknown>
   ): number {
-    if (!this.subscribers[topic]) {
-      this.subscribers[topic] = [];
-    }
-    const index = this.subscribers[topic].indexOf(subscriber);
-    return index;
+    if (!this.subscribers[topic]) this.subscribers[topic] = [];
+
+    return this.subscribers[topic].indexOf(subscriber);
   }
 }
 export { PublishingCompany };
