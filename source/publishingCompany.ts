@@ -4,7 +4,7 @@ import { Publisher } from './publisher';
 
 class PublishingCompany implements Publisher {
   protected subscribers: {
-    [topic: string]: Array<(...params: any) => Promise<unknown>>;
+    [topic: string]: Array<(...params: any[]) => Promise<unknown>>;
   };
 
   constructor() {
@@ -13,7 +13,7 @@ class PublishingCompany implements Publisher {
 
   subscribe(
     topic: string,
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): boolean {
     if (this.findSubscriber(topic, subscriber) !== -1) return false;
     this.subscribers[topic].push(subscriber);
@@ -22,7 +22,7 @@ class PublishingCompany implements Publisher {
 
   unsubscribe(
     topic: string,
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): boolean {
     const index = this.findSubscriber(topic, subscriber);
     if (index === -1) {
@@ -47,7 +47,7 @@ class PublishingCompany implements Publisher {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected findSubscriber(
     topic: string,
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): number {
     if (!this.subscribers[topic]) {
       this.subscribers[topic] = [];

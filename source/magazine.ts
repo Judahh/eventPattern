@@ -3,19 +3,19 @@
 import { Subject } from './subject';
 
 class Magazine implements Subject {
-  protected subscribers: Array<(...params: any) => Promise<unknown>>;
+  protected subscribers: Array<(...params: any[]) => Promise<unknown>>;
 
   constructor() {
     this.subscribers = [];
   }
 
-  subscribe(subscriber: (...params: any) => Promise<unknown>): boolean {
+  subscribe(subscriber: (...params: any[]) => Promise<unknown>): boolean {
     if (this.findSubscriber(subscriber) !== -1) return false;
     this.subscribers.push(subscriber);
     return true;
   }
 
-  unsubscribe(subscriber: (...params: any) => Promise<unknown>): boolean {
+  unsubscribe(subscriber: (...params: any[]) => Promise<unknown>): boolean {
     const index = this.findSubscriber(subscriber);
     if (index === -1) {
       return false;
@@ -32,7 +32,7 @@ class Magazine implements Subject {
   }
 
   protected findSubscriber(
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): number {
     return this.subscribers.indexOf(subscriber);
   }

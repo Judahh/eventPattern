@@ -3,11 +3,11 @@
 interface Publisher {
   subscribe(
     topic: string,
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): boolean;
   unsubscribe(
     topic: string,
-    subscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any[]) => Promise<unknown>
   ): boolean;
   publish(topic: string, ...params: any[]): Promise<void>;
 }
