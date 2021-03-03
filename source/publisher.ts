@@ -7,7 +7,7 @@ interface Publisher {
   ): void;
   unsubscribe(
     stopic: string,
-    ubscriber: (...params: any) => Promise<unknown>
+    subscriber: (...params: any) => Promise<unknown>
   ): void;
   publish(topic: string, ...params: any[]): void;
 }
