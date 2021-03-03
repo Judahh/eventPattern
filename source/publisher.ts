@@ -6,7 +6,7 @@ interface Publisher {
     subscriber: (...params: any) => Promise<unknown>
   ): void;
   unsubscribe(
-    stopic: string,
+    topic: string,
     subscriber: (...params: any) => Promise<unknown>
   ): void;
   publish(topic: string, ...params: any[]): void;
