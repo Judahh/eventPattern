@@ -1,5 +1,5 @@
 class Subscriber {
-  private _name: string;
+  protected _name: string;
 
   get name(): string {
     return this._name;
