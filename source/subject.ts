@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 interface Subject {
-  subscribe(subscriber: (...params: any) => Promise<unknown>): void;
-  unsubscribe(subscriber: (...params: any) => Promise<unknown>): void;
-  publish(...params: any[]): void;
+  subscribe(subscriber: (...params: any) => Promise<unknown>): boolean;
+  unsubscribe(subscriber: (...params: any) => Promise<unknown>): boolean;
+  publish(...params: any[]): Promise<void>;
 }
 export type { Subject };

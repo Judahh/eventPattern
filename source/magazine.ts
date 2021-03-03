@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Subject } from './subject';
 
@@ -9,13 +10,13 @@ class Magazine implements Subject {
   }
 
   subscribe(subscriber: (...params: any) => Promise<unknown>): boolean {
-    if (this.checkSubscribers(subscriber) !== -1) return false;
+    if (this.findSubscriber(subscriber) !== -1) return false;
     this.subscribers.push(subscriber);
     return true;
   }
 
   unsubscribe(subscriber: (...params: any) => Promise<unknown>): boolean {
-    const index = this.checkSubscribers(subscriber);
+    const index = this.findSubscriber(subscriber);
     if (index === -1) {
       return false;
     }
@@ -24,20 +25,16 @@ class Magazine implements Subject {
     return true;
   }
 
-  async publish(...params: any[]): Promise<unknown> {
-    return Promise.all(
-      this.subscribers.map((subscriber) => {
-        return subscriber(...params);
-      })
+  async publish(...params: any[]): Promise<void> {
+    await Promise.all(
+      this.subscribers.map((subscriber) => subscriber(...params))
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  protected checkSubscribers(
+  protected findSubscriber(
     subscriber: (...params: any) => Promise<unknown>
   ): number {
-    const index = this.subscribers.indexOf(subscriber);
-    return index;
+    return this.subscribers.indexOf(subscriber);
   }
 }
 export { Magazine };

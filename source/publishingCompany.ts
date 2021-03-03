@@ -15,7 +15,7 @@ class PublishingCompany implements Publisher {
     topic: string,
     subscriber: (...params: any) => Promise<unknown>
   ): boolean {
-    if (this.checkSubscribers(topic, subscriber) !== -1) return false;
+    if (this.findSubscriber(topic, subscriber) !== -1) return false;
     this.subscribers[topic].push(subscriber);
     return true;
   }
@@ -24,7 +24,7 @@ class PublishingCompany implements Publisher {
     topic: string,
     subscriber: (...params: any) => Promise<unknown>
   ): boolean {
-    const index = this.checkSubscribers(topic, subscriber);
+    const index = this.findSubscriber(topic, subscriber);
     if (index === -1) {
       return false;
     }
@@ -33,11 +33,11 @@ class PublishingCompany implements Publisher {
     return true;
   }
 
-  async publish(topic: string, ...params: any[]): Promise<unknown> {
+  async publish(topic: string, ...params: any[]): Promise<void> {
     if (!this.subscribers[topic]) {
       this.subscribers[topic] = [];
     }
-    return Promise.all(
+    await Promise.all(
       this.subscribers[topic].map((subscriber) => {
         return subscriber(...params);
       })
@@ -45,7 +45,7 @@ class PublishingCompany implements Publisher {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  protected checkSubscribers(
+  protected findSubscriber(
     topic: string,
     subscriber: (...params: any) => Promise<unknown>
   ): number {

@@ -8,13 +8,13 @@ class Subscriber {
     this._name = name;
   }
 
-  read(title: string, content: string): Promise<boolean> {
+  read(title: string, content: string): Promise<void> {
     console.log('Eu ' + this.name + ' leio:');
     return new Promise((resolve) => {
       console.log(title);
       console.log(content);
       console.log();
-      resolve(true);
+      resolve();
     });
   }
 }

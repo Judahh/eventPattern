@@ -4,11 +4,11 @@ interface Publisher {
   subscribe(
     topic: string,
     subscriber: (...params: any) => Promise<unknown>
-  ): void;
+  ): boolean;
   unsubscribe(
     topic: string,
     subscriber: (...params: any) => Promise<unknown>
-  ): void;
-  publish(topic: string, ...params: any[]): void;
+  ): boolean;
+  publish(topic: string, ...params: any[]): Promise<void>;
 }
 export type { Publisher };
