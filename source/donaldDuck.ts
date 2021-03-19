@@ -1,27 +1,15 @@
+import { SenderReceiver } from 'journaly';
 import { Duck } from './duck';
-import { DuckTwin } from './duckTwin';
 
 class DonaldDuck extends Duck {
-  protected _nephews: DuckTwin[];
-
-  constructor(name: string, nephews?: DuckTwin[]) {
-    super(name);
-    this._nephews = nephews ? nephews : [];
+  constructor(name: string, journaly: SenderReceiver<any>) {
+    super(name, journaly);
   }
 
-  get nephews(): Duck[] {
-    return this._nephews;
-  }
-
-  action() {
+  action(name?: string): Promise<boolean> {
     super.action();
-    this.takeCare();
-  }
-
-  takeCare() {
-    for (const nephew of this.nephews) {
-      nephew.stop();
-    }
+    if (name) this.journaly.publish(name + '.paro');
+    return new Promise((resolve) => resolve(true));
   }
 }
 

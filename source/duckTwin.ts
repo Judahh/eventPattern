@@ -1,26 +1,32 @@
-import { DonaldDuck } from './donaldDuck';
+import { SenderReceiver } from 'journaly';
 import { Duck } from './duck';
 
 class DuckTwin extends Duck {
-  protected _uncle: DonaldDuck;
   protected _color: string;
-  constructor(name: string, color: string, uncle: DonaldDuck) {
-    super(name);
-    this._color = color;
+  protected _uncle: string;
+  constructor(
+    name: string,
+    journaly: SenderReceiver<any>,
+    uncle: string,
+    color: string
+  ) {
+    super(name, journaly);
     this._uncle = uncle;
+    this._color = color;
   }
 
   get color(): string {
     return this._color;
   }
 
-  get uncle(): DonaldDuck {
+  get uncle(): string {
     return this._uncle;
   }
 
-  action() {
-    console.log('Eu ' + this.name + ' irrito o ' + this._uncle.name + '!');
-    this._uncle.action();
+  action(): Promise<boolean> {
+    console.log('Eu ' + this.name + ' irrito o ' + this._uncle + '!');
+    this.journaly.publish(this.uncle + '.irrito', this.name);
+    return new Promise((resolve) => resolve(true));
   }
 }
 
