@@ -1,5 +1,5 @@
 import { Magazine } from './magazine';
-import { PublishingCompany } from './publishingCompany';
+import { PublisherSubscriber } from 'journaly';
 import { Subscriber } from './subscriber';
 
 const veja = new Magazine();
@@ -16,11 +16,11 @@ veja.subscribe(leitor2.read.bind(leitor2));
 
 veja.publish('Notícia 2', 'Cla cla cla');
 
-const abril = new PublishingCompany();
+const abril = new PublisherSubscriber();
 
 const leitor3 = new Subscriber('Billy The Caveman');
 
-abril.subscribe('SuperInteressante', leitor3.read.bind(leitor3));
+abril.subscribe(leitor3.read.bind(leitor3), 'SuperInteressante');
 
 abril.publish('SuperInteressante', 'Notícia 3', 'Dla dla dla');
 
