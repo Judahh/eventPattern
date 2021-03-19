@@ -10,8 +10,9 @@ class Duck extends Subscriber {
     this.journaly.subscribe(this.stop.bind(this), this.name + '.paro');
   }
 
-  action(): Promise<boolean> {
+  action(name?: string): Promise<boolean> {
     console.log('Quack!');
+    if (name) this.journaly.publish(name + '.paro');
     return new Promise((resolve) => resolve(true));
   }
 

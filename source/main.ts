@@ -1,7 +1,6 @@
 import { Magazine } from './magazine';
 import { PublisherSubscriberWithMemory, SenderReceiver } from 'journaly';
 import { Subscriber } from './subscriber';
-import { DonaldDuck } from './donaldDuck';
 import { DuckTwin } from './duckTwin';
 import { Duck } from './duck';
 
@@ -37,7 +36,7 @@ const leitor4 = new Duck('Bubba The Cave Duck', journaly);
 
 abril.subscribe(leitor4.read.bind(leitor4), 'SuperDesinteressante');
 
-new DonaldDuck('Pato Donald', journaly);
+new Duck('Pato Donald', journaly);
 
 const twins = [
   new DuckTwin('Huguinho', journaly, 'Pato Donald', 'red'),
