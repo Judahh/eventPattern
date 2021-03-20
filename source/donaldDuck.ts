@@ -13,14 +13,10 @@ class DonaldDuck extends Duck {
     return this._nephews;
   }
 
-  action() {
+  action(name?: string) {
     super.action();
-    this.takeCare();
-  }
-
-  takeCare() {
-    for (const nephew of this.nephews) {
-      nephew.stop();
+    if (name) {
+      this.nephews.find((duckTwin) => duckTwin.name === name)?.stop();
     }
   }
 }

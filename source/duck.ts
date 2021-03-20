@@ -11,6 +11,7 @@ class Duck extends Subscriber {
 
   stop() {
     console.log('Eu ' + this.name + ' parei!');
+    console.log();
   }
 }
 

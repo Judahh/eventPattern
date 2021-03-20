@@ -20,7 +20,7 @@ class DuckTwin extends Duck {
 
   action() {
     console.log('Eu ' + this.name + ' irrito o ' + this._uncle.name + '!');
-    this._uncle.action();
+    this._uncle.action(this.name);
   }
 }
 

@@ -44,12 +44,10 @@ const twins = [
   new DuckTwin('Zezinho', 'green', duck),
   new DuckTwin('Luisinho', 'blue', duck),
 ];
+duck.nephews.push(...twins);
 for (const twin of twins) {
   twin.action();
 }
-
-duck.nephews.push(...twins);
-
 twins.push(new DuckTwin('Pedrinho', 'yellow', duck));
 duck.nephews.push(twins[3]);
 
